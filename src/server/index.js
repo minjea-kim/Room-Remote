@@ -1,22 +1,22 @@
-// const express = require("express");
-// const app = express();
-
-// app.use(express.static("dist"));
-
-// // app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().username }));
-// app.listen(process.env.PORT || 8080, () =>
-//   console.log(`Listening on port ${process.env.PORT || 8080}!`)
-// );
-
 var app = require("express")();
 var cors = require("cors");
+const PORT = 3000;
+
+app.all("/*", (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 app.use(cors());
+app.enable("trust proxy");
 
 var http = require("http").createServer(app);
 
-const PORT = 8080;
-
-var io = require("socket.io")(http);
+const io = require("socket.io")(http, {
+  cors: {
+    origin: "*",
+  },
+});
 
 http.listen(PORT, () => {
   console.log(`listening on *:${PORT}`);
@@ -24,5 +24,8 @@ http.listen(PORT, () => {
 
 io.on("connection", (socket) => {
   console.log("new client connected");
+  const { password } = socket.handshake.query;
+  console.log(password);
+  socket.join(password);
   socket.emit("connection", null);
 });

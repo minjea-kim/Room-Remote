@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { useLocation } from "react-router";
-import socketClient from "socket.io-client";
+import socketIOClient from "socket.io-client";
 
-const SOCKET_SERVER = "http://127.0.0.1:8080";
+
+const SOCKET_SERVER = "http://localhost:3000";
 
 const SessionPage = () => {
   const location = useLocation();
   const password = location.state.password;
+  const socketRef = useRef();
 
-  var socket = socketClient(SOCKET_SERVER);
-  socket.on("connection", () => {
-    console.log(`I'm connected with the back-end`);
+  useEffect(() => {
+    console.log(password);
+    socketRef.current = socketIOClient(SOCKET_SERVER, {
+      query: {password},
+    });
   });
 
   return (
