@@ -52,9 +52,8 @@ http.listen(PORT, () => {
 });
 
 io.on("connection", (socket) => {
-  const { password } = socket.handshake.query;
-  console.log("NEW USER");
-  console.log(password);
-  socket.join(password);
+  const { roomID } = socket.handshake.query;
+  console.log(roomID);
+  socket.join(roomID);
   socket.emit("connection", null);
 });

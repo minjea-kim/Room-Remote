@@ -8,14 +8,14 @@ const SOCKET_SERVER = "http://localhost:3000";
 
 const SessionPage = () => {
   const location = useLocation();
-  const password = location.state.password;
+  const roomID = location.state.roomID;
   const [searchTerm, setSearchTerm] = useState("");
   const socketRef = useRef();
 
   useEffect(() => {
-    console.log(password);
+    console.log(roomID);
     socketRef.current = socketIOClient(SOCKET_SERVER, {
-      query: { password },
+      query: { roomID },
     });
   }, []);
 
@@ -35,7 +35,7 @@ const SessionPage = () => {
     <div>
       Session Page
       <br/>
-      {password}
+      {roomID}
       <br />
       <input
         value={searchTerm}
