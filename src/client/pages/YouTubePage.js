@@ -3,7 +3,17 @@ import { useLocation } from "react-router";
 import socketIOClient from "socket.io-client";
 import axios from "axios";
 import "./css/youtube.scss";
+import YouTube from "react-youtube";
 
+// Youtube Player settings
+const opts = {
+  height: "390",
+  width: "640",
+  playerVars: {
+    // https://developers.google.com/youtube/player_parameters
+    autoplay: 1,
+  },
+};
 const SOCKET_SERVER = "http://localhost:3000";
 
 const SessionPage = () => {
@@ -13,6 +23,7 @@ const SessionPage = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [queueItems, updateQueueItems] = useState([]);
   const [showSearchForm, toggleShowSearchForm] = useState(true);
+  // const [player, setPlayer] = useState(null);
   const socketRef = useRef();
 
   // Create Socket connection
@@ -48,10 +59,24 @@ const SessionPage = () => {
   }
 
   function removeQueueItem(index) {
-    console.log("removing queue item");
     updateQueueItems((queueItems) =>
       queueItems.filter((item, i) => i !== index)
     );
+  }
+
+  function placeItemFirst(index) {
+    const item = queueItems[index];
+    let tempQueueItems = queueItems.filter((item, i) => i !== index);
+    tempQueueItems.unshift(item);
+    updateQueueItems(tempQueueItems);
+  }
+
+  function playVideo() {
+    console.log("playing vifdeo");
+  }
+
+  function pauseVideo() {
+    console.log("pause vifdeo");
   }
 
   return (
@@ -100,6 +125,14 @@ const SessionPage = () => {
           {roomID}
 
           <div className="queue">
+            <div className="overlay">
+              <button
+                className="add-item"
+                onClick={() => toggleShowSearchForm(true)}
+              >
+                +
+              </button>
+            </div>
             {queueItems.length != 0 ? (
               <div className="current-item-thumbnail">
                 <img src={queueItems[0].thumbnail} />
@@ -111,7 +144,9 @@ const SessionPage = () => {
             <div className="queue-items">
               {queueItems.map((item, index) => (
                 <div key={index} className="queue-item">
-                  <p className="title">{item.title}</p>
+                  <p className="title" onClick={() => placeItemFirst(index)}>
+                    {item.title}
+                  </p>
                   <button onClick={() => removeQueueItem(index)}>
                     &times;
                   </button>
@@ -119,15 +154,25 @@ const SessionPage = () => {
               ))}
             </div>
           </div>
-          <button
-            className="add-item"
-            onClick={() => toggleShowSearchForm(true)}
-          >
-            +
-          </button>
+        </div>
+        <div className="controls">
+          <div className="rewind"></div>
+          <div className="play" onClick={playVideo}>
+            PLAY
+          </div>
+          <div className="pause" onClick={pauseVideo}>
+            Pause
+          </div>
+          <div className="forward"></div>
         </div>
       </div>
-      <div className="youtube-page" id="desktop"></div>
+      <div className="youtube-page" id="desktop">
+        {queueItems.length != 0 ? (
+          <YouTube videoId={queueItems[0].videoId} opts={opts} />
+        ) : (
+          <div></div>
+        )}
+      </div>
     </div>
   );
 };
