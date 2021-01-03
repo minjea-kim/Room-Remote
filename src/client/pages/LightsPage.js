@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
+import "./css/lights.scss";
 
 const LightControls = () => {
+  const location = useLocation();
+  const roomID = location.state.roomID;
+
   function turnOffLights() {
     axios
       .post(
@@ -34,10 +38,13 @@ const LightControls = () => {
   }
 
   return (
-    <div>
-      Light Controls
-      <button onClick={turnOnLights}>Turn On</button>
-      <button onClick={turnOffLights}>Turn Off</button>
+    <div className="lights-page">
+      Room: {roomID}
+      <div className="container">
+        <h3>Light Controls</h3>
+        <button onClick={turnOnLights}>Turn On</button>
+        <button onClick={turnOffLights}>Turn Off</button>
+      </div>
     </div>
   );
 };

@@ -1,21 +1,37 @@
 import React, { useState } from "react";
 import { useHistory, useLocation } from "react-router";
-
+import "./css/menu.scss";
 
 const MenuPage = () => {
   const location = useLocation();
+  const history = useHistory();
+
   const roomID = location.state.roomID;
 
   function startYouTubeMode() {
-    console.log(password);
+    console.log(roomID);
     history.push({
       pathname: "/youtube",
-      state: { password: password },
+      state: { roomID: roomID },
+    });
+  }
+
+  function goToLightsPage() {
+    history.push({
+      pathname: "/lights",
+      state: { roomID: roomID },
     });
   }
   return (
-    <div>
-      Menu
+    <div className="menu-page">
+      Room: {roomID}
+      <div className="container">
+        <div className="options">
+          <h3>Choose a Mode</h3>
+          <button onClick={startYouTubeMode}>YouTube</button>
+          <button onClick={goToLightsPage}>Lights</button>
+        </div>
+      </div>
     </div>
   );
 };

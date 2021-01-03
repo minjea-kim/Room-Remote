@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from "react";
-import LightControls from './LightControls';
 import { useLocation } from "react-router";
 import socketIOClient from "socket.io-client";
 import axios from "axios";
@@ -12,6 +11,7 @@ const SessionPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const socketRef = useRef();
 
+  // Create Socket connection
   useEffect(() => {
     console.log(roomID);
     socketRef.current = socketIOClient(SOCKET_SERVER, {
@@ -19,9 +19,11 @@ const SessionPage = () => {
     });
   }, []);
 
-  function send() {
+
+  // Search for YouTube Video
+  function searchYouTube() {
     console.log(searchTerm);
-    axios.post("http://localhost:3000/youtube", { searchTerm: "test" }).then(
+    axios.post("http://localhost:3000/youtube", { searchTerm: searchTerm }).then(
       (res) => {
         console.log(res);
       },
@@ -33,7 +35,7 @@ const SessionPage = () => {
 
   return (
     <div>
-      Session Page
+      YouTube Mode
       <br/>
       {roomID}
       <br />
@@ -41,9 +43,7 @@ const SessionPage = () => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <button onClick={send}>Send</button>
-
-      <LightControls />
+      <button onClick={searchYouTube}>Send</button>
     </div>
   );
 };
