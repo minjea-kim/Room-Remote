@@ -42,8 +42,13 @@ const LightControls = () => {
       Room: {roomID}
       <div className="container">
         <h3>Light Controls</h3>
-        <button onClick={turnOnLights}>Turn On</button>
-        <button onClick={turnOffLights}>Turn Off</button>
+        <div className="applet">
+          <img src="http://placekitten.com/200/300"></img>
+          <div className="controls">
+            <button className="turn-on-btn" onClick={turnOnLights}>Turn On</button>
+            <button className="turn-off-btn" onClick={turnOffLights}>Turn Off</button>
+          </div>
+        </div>
       </div>
     </div>
   );
