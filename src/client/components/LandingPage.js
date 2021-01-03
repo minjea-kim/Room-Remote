@@ -15,6 +15,8 @@ const LandingPage = () => {
   }
   return (
     <div>
+      <h1>Enter your name</h1>
+      <input />
       <h1>Enter a password to start session</h1>
       <input value={password} onChange={(e) => setPassword(e.target.value)} />
       <button onClick={startSession}>Click</button>
