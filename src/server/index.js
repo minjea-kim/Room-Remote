@@ -27,15 +27,16 @@ const io = require("socket.io")(http, {
   },
 });
 
+
+// Variables for app
+const username = "test";
+const password = "123";
 let queueItems = [];
 
 // REST API
 app.get("/queueitems", (req, res) => {
   res.send(queueItems);
 });
-
-const username = "test";
-const password = "123";
 
 app.post("/login", async function (req, res) {
   console.log(req.body.username);
