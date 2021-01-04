@@ -5,6 +5,7 @@ import axios from "axios";
 import YouTube from "react-youtube";
 import Navbar from "../../layout/Navbar.js";
 import "./css/partysession.scss";
+import SearchBackground from "./img/search_image.png";
 
 // Youtube Player settings
 const opts = {
@@ -95,6 +96,7 @@ const PartySession = () => {
 
   function addToQueue(newItem) {
     toggleShowSearchForm(false);
+    setSearchTerm('');
     setSearchResults([]);
     newItem.contributor = name;
     console.log(newItem);
@@ -140,20 +142,27 @@ const PartySession = () => {
         {/* Search Form-------------- */}
         {showSearchForm ? (
           <div className="search-form">
+            {searchResults.length == 0 ? (
+              <div className="search-msg">
+                <img src={SearchBackground} alt="Search Background" />
+                <p>Search for videos to add to the queue</p>
+              </div>
+            ) : (
+              <div></div>
+            )}
+
+            <button
+              className="exit-search-form"
+              onClick={() => toggleShowSearchForm(false)}
+            >
+              &times;
+            </button>
             <form>
               <input
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
               <button onClick={(event) => searchYouTube(event)}>Search</button>
-              <div className="header">
-                <button
-                  className="exit-search-form"
-                  onClick={() => toggleShowSearchForm(false)}
-                >
-                  &times;
-                </button>
-              </div>
             </form>
 
             <div className="container">
@@ -196,7 +205,7 @@ const PartySession = () => {
             <div className="queue-items">
               {queueItems.map((item, index) => (
                 <div key={index} className="queue-item">
-                  <img src={item.thumbnail} />a
+                  <img src={item.thumbnail} />
                   <div className="item-info">
                     <p className="title" onClick={() => placeItemFirst(index)}>
                       {item.title}
