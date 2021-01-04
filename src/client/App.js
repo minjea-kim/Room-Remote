@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
+import LandingPage from "./pages/Landing/LandingPage";
 import MenuPage from "./pages/MenuPage";
-import YouTubePage from "./pages/YouTubePage";
-import LightsPage from "./pages/LightsPage";
+import YouTubePage from "./pages/YouTube/YouTubePage.js";
+import LightsPage from "./pages/Lights/LightsPage.js";
 
 const App = () => {
   return (

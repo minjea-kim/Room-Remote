@@ -4,7 +4,7 @@ import socketIOClient from "socket.io-client";
 import axios from "axios";
 import "./css/youtube.scss";
 import YouTube from "react-youtube";
-import Navbar from "../components/Navbar";
+import Navbar from "../../layout/Navbar";
 
 // Youtube Player settings
 const opts = {

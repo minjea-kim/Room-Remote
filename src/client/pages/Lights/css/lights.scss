@@ -1,0 +1,53 @@
+// Color Palette
+$font-color: #fefefe;
+$primary-color: #161616;
+
+.lights-page {
+  .container {
+    width: 90%;
+    margin: auto;
+
+    h3 {
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    .applet {
+      display: flex;
+      img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+        border-radius: 5px;
+      }
+      .controls {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        background: none;
+        margin: auto;
+
+        button {
+          display: block;
+          font-size: 1rem;
+          border-radius: 5px;
+          background: none;
+          padding: 0.5rem 1rem;
+          margin-left: 1rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .turn-on-btn {
+          border: 1px solid #adfff5;
+          color: #adfff5;
+        }
+
+        .turn-off-btn {
+          border: 1px solid #dd6363;
+          color: #dd6363;
+        }
+      }
+    }
+  }
+}
