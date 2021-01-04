@@ -4,13 +4,20 @@ import "./css/navbar.scss";
 
 const Navbar = () => {
   const history = useHistory();
-  const [showNavbar, toggleShowNavbar] = useState(false);
+  const [showNavbar, toggleShowNavbar] = useState(true);
 
-  function enterRoom() {
+  function goToYouTubeParty() {
     console.log(roomID);
     history.push({
-      pathname: "/menu",
-      state: { roomID: roomID, isHost: false },
+      pathname: "/youtubeparty",
+      state: { roomID: roomID, isHost: isHost },
+    });
+  }
+
+  function goToLightsPage() {
+    history.push({
+      pathname: "/lights",
+      state: { roomID: roomID },
     });
   }
 
@@ -70,6 +77,28 @@ const Navbar = () => {
                 <rect y="5" width="14.6618" height="3.07425" fill="#FEFEFE" />
               </svg>
             </button>
+          </div>
+
+          <div className="options">
+            <div className="menu-option">
+              <button className="logo"></button>
+              <label>Lights</label>
+            </div>
+
+            <div className="menu-option">
+              <button className="logo"></button>
+              <label>YouTube Party</label>
+            </div>
+
+            <div className="menu-option">
+              <button className="logo"></button>
+              <label>Keyboard Mouse</label>
+            </div>
+
+            <div className="menu-option">
+              <button className="logo"></button>
+              <label>TV</label>
+            </div>
           </div>
         </div>
       ) : (
