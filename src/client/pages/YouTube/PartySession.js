@@ -18,7 +18,7 @@ const opts = {
 const SOCKET_SERVER = `${process.env.BACKEND_HOST}`;
 console.log("SOCKET_SERVER:", SOCKET_SERVER);
 
-const YouTubePage = () => {
+const PartySession = () => {
   const location = useLocation();
   const roomID = location.state.roomID;
   const isHost = location.state.isHost;
@@ -231,4 +231,4 @@ const YouTubePage = () => {
   );
 };
 
-export default YouTubePage;
+export default PartySession;

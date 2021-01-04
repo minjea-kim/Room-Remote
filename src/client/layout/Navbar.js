@@ -114,7 +114,7 @@ const Navbar = ({ openMenu }) => {
         </div>
       ) : (
         <div>
-          <AuthenticationError />
+          {/* <AuthenticationError /> */}
         </div>
       )}
     </div>

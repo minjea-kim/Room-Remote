@@ -1,14 +1,19 @@
-// Color Palette
-$font-color: #fefefe;
-$primary-color: #161616;
+@import "../../../globalvariables.scss";
 
 .lights-page {
+  height: 100vh;
+  width: 100vw;
+  background-image: url("../img/wifi_signal.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
   .container {
     width: 90%;
     margin: auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    margin-top: 5%;
 
     h3 {
       font-size: 2rem;
