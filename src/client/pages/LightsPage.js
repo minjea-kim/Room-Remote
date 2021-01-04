@@ -7,34 +7,26 @@ const LightControls = () => {
   const location = useLocation();
   const roomID = location.state.roomID;
 
-  function turnOffLights() {
-    axios
-      .post(
-        "https://maker.ifttt.com/trigger/switch1_off/with/key/cnpX5PYhtCEmEVq4_2WZz2"
-      )
-      .then(
-        (res) => {
-          console.log(res);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+  function turnOffLights(webhook) {
+    axios.post(webhook).then(
+      (res) => {
+        console.log(res);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
-  function turnOnLights() {
-    axios
-      .post(
-        "https://maker.ifttt.com/trigger/switch1_on/with/key/cnpX5PYhtCEmEVq4_2WZz2"
-      )
-      .then(
-        (res) => {
-          console.log(res);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+  function turnOnLights(webhook) {
+    axios.post(webhook).then(
+      (res) => {
+        console.log(res);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   return (
@@ -45,8 +37,26 @@ const LightControls = () => {
         <div className="applet">
           <img src="http://placekitten.com/200/300"></img>
           <div className="controls">
-            <button className="turn-on-btn" onClick={turnOnLights}>Turn On</button>
-            <button className="turn-off-btn" onClick={turnOffLights}>Turn Off</button>
+            <button
+              className="turn-on-btn"
+              onClick={() =>
+                turnOnLights(
+                  "https://maker.ifttt.com/trigger/switch1_on/with/key/cnpX5PYhtCEmEVq4_2WZz2"
+                )
+              }
+            >
+              Turn On
+            </button>
+            <button
+              className="turn-off-btn"
+              onClick={() =>
+                turnOffLights(
+                  "https://maker.ifttt.com/trigger/switch1_off/with/key/cnpX5PYhtCEmEVq4_2WZz2"
+                )
+              }
+            >
+              Turn Off
+            </button>
           </div>
         </div>
       </div>

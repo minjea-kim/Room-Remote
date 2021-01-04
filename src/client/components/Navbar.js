@@ -4,7 +4,7 @@ import "./css/navbar.scss";
 
 const Navbar = () => {
   const history = useHistory();
-  const [showNavbar, toggleShowNavbar] = useState(true);
+  const [showNavbar, toggleShowNavbar] = useState(false);
 
   function goToYouTubeParty() {
     console.log(roomID);
