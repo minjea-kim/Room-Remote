@@ -3,7 +3,7 @@ import { useHistory, Link } from "react-router-dom";
 import AuthenticationError from "../layout/AuthenticationError.js";
 import "./css/navbar.scss";
 
-const Navbar = (openMenu) => {
+const Navbar = ({ openMenu }) => {
   const [showNavbar, toggleShowNavbar] = useState(openMenu);
 
   return (
@@ -43,7 +43,7 @@ const Navbar = (openMenu) => {
               <rect y="5" width="14.6618" height="3.07425" fill="#FEFEFE" />
             </svg>
           </button>
-          {showNavbar ? (
+          {showNavbar || openMenu ? (
             <div className="navbar-menu">
               <div className="navbar">
                 <button onClick={() => toggleShowNavbar(!showNavbar)}>

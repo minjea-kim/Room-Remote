@@ -6,6 +6,9 @@ $primary-color: #161616;
   .container {
     width: 90%;
     margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 
     h3 {
       font-size: 2rem;
@@ -14,38 +17,68 @@ $primary-color: #161616;
 
     .applet {
       display: flex;
+      flex-direction: column;
+      width: 40%;
+
+      $img-size: 150px;
+
       img {
-        width: 100px;
-        height: 100px;
+        width: $img-size;
+        height: $img-size;
         object-fit: cover;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
         border-radius: 5px;
+        margin: auto;
       }
       .controls {
-        width: 100%;
         display: flex;
-        flex-direction: column;
         background: none;
+        width: $img-size;
         margin: auto;
+        margin-top: 10px;
 
         button {
           display: block;
           font-size: 1rem;
-          border-radius: 5px;
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
           background: none;
-          padding: 0.5rem 1rem;
-          margin-left: 1rem;
-          margin-bottom: 0.5rem;
+          margin: auto;
+          margin-top: 0.5rem;
+
+          svg {
+            height: 60%;
+            display: block;
+            margin: auto;
+          }
         }
 
         .turn-on-btn {
-          border: 1px solid #adfff5;
-          color: #adfff5;
+          background: linear-gradient(
+            136.18deg,
+            #1b1b1b -43.92%,
+            #161616 117.48%
+          );
+          border: 0.562848px solid #b6eeff;
+          box-sizing: border-box;
+          box-shadow: -1.43571px -1.43571px 7.17857px rgba(87, 87, 87, 0.5),
+            2.39286px 2.39286px 7.17857px #000000;
+          margin-right: 10px;
         }
 
         .turn-off-btn {
-          border: 1px solid #dd6363;
-          color: #dd6363;
+          background: linear-gradient(
+            136.18deg,
+            #1b1b1b -43.92%,
+            #161616 117.48%
+          );
+          border: 0.562848px solid #ff6666;
+          box-sizing: border-box;
+          box-shadow: -1.43571px -1.43571px 7.17857px rgba(87, 87, 87, 0.5),
+            2.39286px 2.39286px 7.17857px #000000;
+
+          margin-left: 10px;
         }
       }
     }
