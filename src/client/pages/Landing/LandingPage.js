@@ -4,21 +4,13 @@ import "./css/landing.scss";
 
 const LandingPage = () => {
   const history = useHistory();
-  const [roomID, setRoomID] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   function enterRoom() {
     console.log(roomID);
     history.push({
       pathname: "/menu",
-      state: { roomID: roomID, isHost: false},
-    });
-  }
-
-  function createRoom() {
-    console.log(roomID);
-    history.push({
-      pathname: "/youtube",
-      state: { roomID: roomID, isHost: true },
     });
   }
 
@@ -44,7 +36,7 @@ const LandingPage = () => {
 
         <form id="mobile-form">
           <h2>Enter the room ID</h2>
-          <input value={roomID} onChange={(e) => setRoomID(e.target.value)} />
+          <input value={roomID} onChange={(e) => setUsername(e.target.value)} />
 
           <h2>Enter your name</h2>
           <input />
@@ -53,7 +45,7 @@ const LandingPage = () => {
 
         <form id="desktop-form">
           <h2>Create room ID:</h2>
-          <input value={roomID} onChange={(e) => setRoomID(e.target.value)} />
+          <input value={roomID} onChange={(e) => setPassword(e.target.value)} />
           <button onClick={createRoom}>Create Room</button>
         </form>
       </div>
