@@ -10,6 +10,18 @@
   background-size: cover;
   background-position: bottom;
 
+  .error-msg {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    margin: 0;
+    padding: 0.5rem;
+    background: #6a1a1a;
+    color: $font-color;
+    text-align: center;
+    animation: bounceInDown 1s;
+  }
+
   .container {
     width: 65%;
     margin: auto;

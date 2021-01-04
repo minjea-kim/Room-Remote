@@ -4,24 +4,23 @@ const bodyParser = require("body-parser");
 const yts = require("yt-search");
 const PORT = 3000;
 
+// SERVER SETUP
 app.all("/*", (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   next();
 });
 
 app.use(cors());
+app.use(bodyParser.json());
+app.enable("trust proxy");
 
 app.use(
   bodyParser.urlencoded({
     extended: true,
   })
 );
-app.use(bodyParser.json());
-
-app.enable("trust proxy");
 
 var http = require("http").createServer(app);
-
 const io = require("socket.io")(http, {
   cors: {
     origin: "*",
@@ -30,8 +29,21 @@ const io = require("socket.io")(http, {
 
 let queueItems = [];
 
+// REST API
 app.get("/queueitems", (req, res) => {
   res.send(queueItems);
+});
+
+const username = "test";
+const password = "123";
+
+app.post("/login", async function (req, res) {
+  console.log(req.body.username);
+  if (req.body.username == username && req.body.password == password) {
+    res.send(true);
+  } else {
+    res.send(false);
+  }
 });
 
 app.post("/youtube", async function (req, res) {
@@ -57,6 +69,7 @@ http.listen(PORT, () => {
   console.log(`listening on *:${PORT}`);
 });
 
+// SOCKET CONNECTION
 io.on("connection", (socket) => {
   const { roomID } = socket.handshake.query;
   console.log(roomID);
@@ -91,5 +104,4 @@ io.on("connection", (socket) => {
   socket.on("pauseVideo", (data) => {
     io.sockets.in(data.roomID).emit("pauseVideo");
   });
-
 });

@@ -1,21 +1,36 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
+import axios from "axios";
 import "./css/landing.scss";
 
 const LandingPage = () => {
-  const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  function enterRoom() {
-    console.log(roomID);
-    history.push({
-      pathname: "/menu",
-    });
+  function login(event) {
+    event.preventDefault();
+    axios
+      .post(`${process.env.BACKEND_HOST}/login`, { username, password })
+      .then(
+        (res) => {
+          if (res.data == true) {
+            window.$authenticated = true;
+            history.push({
+              pathname: "/menu",
+            });
+          } else {
+            setErrorMsg("Invalid Credentials.");
+          }
+        },
+        (error) => {
+          setErrorMsg("An error has occured. Please try again");
+        }
+      );
   }
 
   return (
     <div className="landing-page">
+      {errorMsg != "" ? <p className="error-msg">{errorMsg}</p> : <div></div>}
       <div className="container">
         <div className="logo">
           <svg
@@ -35,18 +50,21 @@ const LandingPage = () => {
         </div>
 
         <form id="mobile-form">
-          <h2>Enter the room ID</h2>
-          <input value={roomID} onChange={(e) => setUsername(e.target.value)} />
+          <h2>Username</h2>
+          <input
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
 
-          <h2>Enter your name</h2>
-          <input />
-          <button onClick={enterRoom}>Join Room</button>
+          <h2>Password</h2>
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button onClick={(event) => login(event)}>Login</button>
         </form>
 
         <form id="desktop-form">
-          <h2>Create room ID:</h2>
-          <input value={roomID} onChange={(e) => setPassword(e.target.value)} />
-          <button onClick={createRoom}>Create Room</button>
         </form>
       </div>
     </div>
