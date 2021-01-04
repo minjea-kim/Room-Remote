@@ -68,7 +68,7 @@
           width: 2000px;
           left: -100px;
           height: 1px;
-          background: #B6EEFF;
+          background: #b6eeff;
         }
 
         .queue-item:first-child::before {
@@ -135,11 +135,40 @@
 
   .search-form {
     position: fixed;
+    top: 0;
     z-index: 999;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(22, 22, 22, 0.9);
     overflow: scroll;
+
+    form {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      // background: blue;
+      position: fixed;
+      bottom: 0;
+      padding: 1rem;
+
+      input {
+        width: 70%;
+        background: none;
+        border: none;
+        border-bottom: 1px solid $font-color;
+        color: $font-color;
+        font-size: 1rem;
+        padding-left: 0.5rem;
+      }
+
+      button {
+        color: $font-color;
+        background: #39b3d9;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+      }
+    }
 
     .container {
       width: 90%;

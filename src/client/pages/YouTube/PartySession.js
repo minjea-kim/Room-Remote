@@ -77,7 +77,8 @@ const PartySession = () => {
   }, []);
 
   // Search for YouTube Video
-  function searchYouTube() {
+  function searchYouTube(event) {
+    event.preventDefault();
     console.log(searchTerm);
     axios
       .post(`${process.env.BACKEND_HOST}/youtube`, { searchTerm: searchTerm })
@@ -134,11 +135,22 @@ const PartySession = () => {
     <div>
       <Navbar />
       <div className="youtube-page" id="mobile">
+
+
         <div className="overlay"></div>
+
+
         {/* Search Form-------------- */}
         {showSearchForm ? (
           <div className="search-form">
-            <div className="container">
+
+
+            <form>
+              <input
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <button onClick={(event) => searchYouTube(event)}>Send</button>
               <div className="header">
                 <button
                   className="exit-search-form"
@@ -146,16 +158,14 @@ const PartySession = () => {
                 >
                   &times;
                 </button>
-                <input
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-                <button onClick={searchYouTube}>Send</button>
               </div>
+            </form>
+
 
               <div className="results">
                 {searchResults.map((result, index) => (
                   <div onClick={() => addToQueue(result)}>
+
                     <div className="search-result" key={index}>
                       <img src={result.thumbnail} />
                       <div className="text">
@@ -169,8 +179,9 @@ const PartySession = () => {
                   </div>
                 ))}
               </div>
+
+
             </div>
-          </div>
         ) : (
           <div></div>
         )}
@@ -181,9 +192,12 @@ const PartySession = () => {
 
           <div className="queue">
             <div className="queue-items">
+
               {queueItems.map((item, index) => (
                 <div key={index} className="queue-item">
-                  <img src={item.thumbnail} />
+                  <img src={item.thumbnail} />a
+
+
                   <div className="item-info">
                     <p className="title" onClick={() => placeItemFirst(index)}>
                       {item.title}
@@ -212,17 +226,28 @@ const PartySession = () => {
                       <p>{item.contributor}</p>
                     </div>
 
-                    <button onClick={() => removeQueueItem(index)}>
+
+                    <button>
                       &times;
                     </button>
+                  
                   </div>
+                
+                
                 </div>
               ))}
+
+
             </div>
           </div>
         </div>
+
+
         <div className="controls">
+
+
           <div className="playback">
+
             <button className="rewind">
               <svg
                 width="17"
@@ -245,9 +270,7 @@ const PartySession = () => {
                 />
               </svg>
             </button>
-            {/* <div className="play" onClick={playVideo}>
-              PLAY
-            </div> */}
+            
             <button className="pause" onClick={pauseVideo}>
               <svg
                 width="29"
@@ -263,6 +286,7 @@ const PartySession = () => {
                 <rect x="22" width="7" height="36" rx="2" fill="#ADADAD" />
               </svg>
             </button>
+            
             <button className="forward">
               <svg
                 width="17"
@@ -294,7 +318,12 @@ const PartySession = () => {
             +
           </button>
         </div>
+
+
+
       </div>
+
+
       <div className="youtube-page" id="desktop">
         {queueItems.length != 0 ? (
           <YouTube
@@ -306,6 +335,8 @@ const PartySession = () => {
           <div></div>
         )}
       </div>
+
+
     </div>
   );
 };
