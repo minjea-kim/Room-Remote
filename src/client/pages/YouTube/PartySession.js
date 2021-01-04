@@ -135,22 +135,17 @@ const PartySession = () => {
     <div>
       <Navbar />
       <div className="youtube-page" id="mobile">
-
-
         <div className="overlay"></div>
-
 
         {/* Search Form-------------- */}
         {showSearchForm ? (
           <div className="search-form">
-
-
             <form>
               <input
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
-              <button onClick={(event) => searchYouTube(event)}>Send</button>
+              <button onClick={(event) => searchYouTube(event)}>Search</button>
               <div className="header">
                 <button
                   className="exit-search-form"
@@ -161,17 +156,25 @@ const PartySession = () => {
               </div>
             </form>
 
-
-              <div className="results">
+            <div className="container">
+              <div className="search-results">
                 {searchResults.map((result, index) => (
-                  <div onClick={() => addToQueue(result)}>
-
+                  <div>
                     <div className="search-result" key={index}>
                       <img src={result.thumbnail} />
                       <div className="text">
                         <p className="title">{result.title}</p>
-                        <br />
                         <p className="author">{result.author.name}</p>
+
+                        <div className="actions">
+                          <button
+                            className="queue-btn"
+                            onClick={() => addToQueue(result)}
+                          >
+                            Queue
+                          </button>
+                          <button className="preview-btn">Preview</button>
+                        </div>
                       </div>
                     </div>
 
@@ -179,9 +182,8 @@ const PartySession = () => {
                   </div>
                 ))}
               </div>
-
-
             </div>
+          </div>
         ) : (
           <div></div>
         )}
@@ -192,12 +194,9 @@ const PartySession = () => {
 
           <div className="queue">
             <div className="queue-items">
-
               {queueItems.map((item, index) => (
                 <div key={index} className="queue-item">
                   <img src={item.thumbnail} />a
-
-
                   <div className="item-info">
                     <p className="title" onClick={() => placeItemFirst(index)}>
                       {item.title}
@@ -226,28 +225,16 @@ const PartySession = () => {
                       <p>{item.contributor}</p>
                     </div>
 
-
-                    <button>
-                      &times;
-                    </button>
-                  
+                    <button>&times;</button>
                   </div>
-                
-                
                 </div>
               ))}
-
-
             </div>
           </div>
         </div>
 
-
         <div className="controls">
-
-
           <div className="playback">
-
             <button className="rewind">
               <svg
                 width="17"
@@ -270,7 +257,7 @@ const PartySession = () => {
                 />
               </svg>
             </button>
-            
+
             <button className="pause" onClick={pauseVideo}>
               <svg
                 width="29"
@@ -286,7 +273,7 @@ const PartySession = () => {
                 <rect x="22" width="7" height="36" rx="2" fill="#ADADAD" />
               </svg>
             </button>
-            
+
             <button className="forward">
               <svg
                 width="17"
@@ -318,11 +305,7 @@ const PartySession = () => {
             +
           </button>
         </div>
-
-
-
       </div>
-
 
       <div className="youtube-page" id="desktop">
         {queueItems.length != 0 ? (
@@ -335,8 +318,6 @@ const PartySession = () => {
           <div></div>
         )}
       </div>
-
-
     </div>
   );
 };
