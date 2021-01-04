@@ -4,7 +4,7 @@ import socketIOClient from "socket.io-client";
 import axios from "axios";
 import "./css/youtube.scss";
 import YouTube from "react-youtube";
-import Navbar from "../../layout/Navbar";
+import Navbar from "../../layout/Navbar.js";
 
 // Youtube Player settings
 const opts = {
@@ -18,7 +18,7 @@ const opts = {
 const SOCKET_SERVER = `${process.env.BACKEND_HOST}`;
 console.log("SOCKET_SERVER:", SOCKET_SERVER);
 
-const SessionPage = () => {
+const YouTubePage = () => {
   const location = useLocation();
   const roomID = location.state.roomID;
   const isHost = location.state.isHost;
@@ -231,4 +231,4 @@ const SessionPage = () => {
   );
 };
 
-export default SessionPage;
+export default YouTubePage;

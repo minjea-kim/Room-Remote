@@ -1,24 +1,30 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
+import { useHistory, Link } from "react-router-dom";
 import "./css/navbar.scss";
 
-const Navbar = () => {
+const Navbar = (openMenu) => {
   const history = useHistory();
-  const [showNavbar, toggleShowNavbar] = useState(false);
+  const [showNavbar, toggleShowNavbar] = useState(openMenu);
 
   function goToYouTubeParty() {
-    console.log(roomID);
-    history.push({
-      pathname: "/youtubeparty",
-      state: { roomID: roomID, isHost: isHost },
-    });
+    if (window.$authenticated) {
+      history.push({
+        pathname: "/youtubeparty",
+      });
+    } else {
+      console.log("NOT AUTHENTICATEsd")
+    }
   }
 
   function goToLightsPage() {
-    history.push({
-      pathname: "/lights",
-      state: { roomID: roomID },
-    });
+    if (window.$authenticated) {
+      history.push({
+        pathname: "/lights",
+        state: { roomID: roomID },
+      });
+    } else {
+      console.log("NOT AUTHENTICATEsd")
+    }
   }
 
   return (
@@ -81,12 +87,12 @@ const Navbar = () => {
 
           <div className="options">
             <div className="menu-option">
-              <button className="logo"></button>
+              <button className="logo" onClick={goToLightsPage}></button>
               <label>Lights</label>
             </div>
 
             <div className="menu-option">
-              <button className="logo"></button>
+              <button className="logo" onClick={goToYouTubeParty}></button>
               <label>YouTube Party</label>
             </div>
 

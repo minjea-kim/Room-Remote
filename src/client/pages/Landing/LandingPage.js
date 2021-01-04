@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-
 import "./css/landing.scss";
 
 const LandingPage = () => {
@@ -22,6 +21,7 @@ const LandingPage = () => {
       state: { roomID: roomID, isHost: true },
     });
   }
+
   return (
     <div className="landing-page">
       <div className="container">

@@ -6,6 +6,8 @@ const MenuPage = () => {
   const location = useLocation();
   const history = useHistory();
 
+  console.log(window.$authenticated)
+
   const roomID = location.state.roomID;
   const isHost = location.state.isHost;
   console.log("isHost", isHost)
