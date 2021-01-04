@@ -4,6 +4,7 @@ import socketIOClient from "socket.io-client";
 import axios from "axios";
 import "./css/youtube.scss";
 import YouTube from "react-youtube";
+import Navbar from "../components/Navbar";
 
 // Youtube Player settings
 const opts = {
@@ -14,7 +15,8 @@ const opts = {
     autoplay: 1,
   },
 };
-const SOCKET_SERVER = "http://localhost:3000";
+const SOCKET_SERVER = `${process.env.BACKEND_HOST}`;
+console.log("SOCKET_SERVER:", SOCKET_SERVER);
 
 const SessionPage = () => {
   const location = useLocation();
@@ -25,7 +27,7 @@ const SessionPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [queueItems, updateQueueItems] = useState([]);
-  const [showSearchForm, toggleShowSearchForm] = useState(true);
+  const [showSearchForm, toggleShowSearchForm] = useState(false);
   // const [ytPlayer, setYouTubePlayer] = useState(undefined);
   // const handleReady = (event) => setYouTubePlayer(() => event.target);
 
@@ -39,7 +41,7 @@ const SessionPage = () => {
 
   // Create Socket connection
   useEffect(() => {
-    axios.get("http://localhost:3000/queueitems").then(
+    axios.get(`${process.env.BACKEND_HOST}/queueitems`).then(
       (res) => {
         updateQueueItems(res.data);
       },
@@ -79,7 +81,7 @@ const SessionPage = () => {
   function searchYouTube() {
     console.log(searchTerm);
     axios
-      .post("http://localhost:3000/youtube", { searchTerm: searchTerm })
+      .post(`${process.env.BACKEND_HOST}/youtube`, { searchTerm: searchTerm })
       .then(
         (res) => {
           console.log(res.data);
@@ -128,6 +130,7 @@ const SessionPage = () => {
 
   return (
     <div>
+      <Navbar />
       <div className="youtube-page" id="mobile">
         {showSearchForm ? (
           <div className="search-form">
