@@ -6,7 +6,7 @@ import PartySession from "./pages/YouTube/PartySession.js";
 import LightsPage from "./pages/Lights/LightsPage.js";
 import Navbar from "./layout/Navbar.js";
 
-window.$authenticated = false;
+window.$authenticated = true;
 
 const App = () => {
   return (

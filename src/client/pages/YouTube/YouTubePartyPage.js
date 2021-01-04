@@ -13,7 +13,7 @@ const YouTubePartyPage = () => {
     console.log(roomID);
     history.push({
       pathname: "/partysession",
-      state: { roomID },
+      state: { roomID, name },
     });
   }
 
