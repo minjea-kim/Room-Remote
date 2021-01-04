@@ -28,6 +28,12 @@ const io = require("socket.io")(http, {
   },
 });
 
+let queueItems = [];
+
+app.get("/queueitems", (req, res) => {
+  res.send(queueItems);
+});
+
 app.post("/youtube", async function (req, res) {
   const searchTerm = req.body.searchTerm;
   try {
@@ -56,4 +62,34 @@ io.on("connection", (socket) => {
   console.log(roomID);
   socket.join(roomID);
   socket.emit("connection", null);
+
+  // Listen for new messages
+  socket.on("addNewItem", (data) => {
+    // console.log("NEW ITEM: ", data.body);
+    queueItems.push(data.item);
+    io.sockets.in(data.roomID).emit("addNewItem", data.item);
+  });
+
+  socket.on("removeItem", (data) => {
+    queueItems = queueItems.filter((item, i) => i !== data.itemIndex);
+    io.sockets.in(data.roomID).emit("removeItem", data.itemIndex);
+  });
+
+  socket.on("placeItemFirst", (data) => {
+    const item = queueItems[data.itemIndex];
+    let tempQueueItems = queueItems.filter((item, i) => i !== data.itemIndex);
+    tempQueueItems.unshift(item);
+    console.log(tempQueueItems);
+    queueItems = tempQueueItems;
+    io.sockets.in(data.roomID).emit("placeItemFirst", queueItems);
+  });
+
+  socket.on("playVideo", (data) => {
+    io.sockets.in(data.roomID).emit("playVideo");
+  });
+
+  socket.on("pauseVideo", (data) => {
+    io.sockets.in(data.roomID).emit("pauseVideo");
+  });
+
 });

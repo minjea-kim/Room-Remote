@@ -11,7 +11,15 @@ const LandingPage = () => {
     console.log(roomID);
     history.push({
       pathname: "/menu",
-      state: { roomID: roomID },
+      state: { roomID: roomID, isHost: false},
+    });
+  }
+
+  function createRoom() {
+    console.log(roomID);
+    history.push({
+      pathname: "/youtube",
+      state: { roomID: roomID, isHost: true },
     });
   }
   return (
@@ -34,13 +42,19 @@ const LandingPage = () => {
           </svg>
         </div>
 
-        <form>
+        <form id="mobile-form">
           <h2>Enter the room ID</h2>
           <input value={roomID} onChange={(e) => setRoomID(e.target.value)} />
 
           <h2>Enter your name</h2>
           <input />
           <button onClick={enterRoom}>Join Room</button>
+        </form>
+
+        <form id="desktop-form">
+          <h2>Create room ID:</h2>
+          <input value={roomID} onChange={(e) => setRoomID(e.target.value)} />
+          <button onClick={createRoom}>Create Room</button>
         </form>
       </div>
     </div>

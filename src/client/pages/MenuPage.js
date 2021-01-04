@@ -7,12 +7,14 @@ const MenuPage = () => {
   const history = useHistory();
 
   const roomID = location.state.roomID;
+  const isHost = location.state.isHost;
+  console.log("isHost", isHost)
 
   function startYouTubeMode() {
     console.log(roomID);
     history.push({
       pathname: "/youtube",
-      state: { roomID: roomID },
+      state: { roomID: roomID, isHost: isHost },
     });
   }
 

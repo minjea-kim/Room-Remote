@@ -19,18 +19,59 @@ const SOCKET_SERVER = "http://localhost:3000";
 const SessionPage = () => {
   const location = useLocation();
   const roomID = location.state.roomID;
+  const isHost = location.state.isHost;
+  console.log("isHost", isHost);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [queueItems, updateQueueItems] = useState([]);
   const [showSearchForm, toggleShowSearchForm] = useState(true);
+  // const [ytPlayer, setYouTubePlayer] = useState(undefined);
+  // const handleReady = (event) => setYouTubePlayer(() => event.target);
+
   // const [player, setPlayer] = useState(null);
   const socketRef = useRef();
+  const ytPlayerRef = useRef();
+
+  const handleReady = (event) => {
+    ytPlayerRef.current = event.target;
+  };
 
   // Create Socket connection
   useEffect(() => {
-    console.log(roomID);
+    axios.get("http://localhost:3000/queueitems").then(
+      (res) => {
+        updateQueueItems(res.data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
     socketRef.current = socketIOClient(SOCKET_SERVER, {
       query: { roomID },
+    });
+
+    socketRef.current.on("addNewItem", (newItem) => {
+      updateQueueItems((queueItems) => [...queueItems, newItem]);
+    });
+
+    socketRef.current.on("removeItem", (itemIndex) => {
+      updateQueueItems((queueItems) =>
+        queueItems.filter((item, i) => i !== itemIndex)
+      );
+    });
+
+    socketRef.current.on("placeItemFirst", (newQueueItems) => {
+      updateQueueItems(newQueueItems);
+    });
+
+    socketRef.current.on("playVideo", () => {
+      ytPlayerRef.current.playVideo();
+    });
+
+    socketRef.current.on("pauseVideo", () => {
+      ytPlayerRef.current.pauseVideo();
     });
   }, []);
 
@@ -53,30 +94,36 @@ const SessionPage = () => {
   function addToQueue(newItem) {
     toggleShowSearchForm(false);
     setSearchResults([]);
-    updateQueueItems((queueItems) => [...queueItems, newItem]);
-    console.log(newItem);
-    console.log(queueItems);
+    socketRef.current.emit("addNewItem", {
+      item: newItem,
+      roomID: roomID,
+    });
   }
 
   function removeQueueItem(index) {
-    updateQueueItems((queueItems) =>
-      queueItems.filter((item, i) => i !== index)
-    );
+    socketRef.current.emit("removeItem", {
+      itemIndex: index,
+      roomID: roomID,
+    });
   }
 
   function placeItemFirst(index) {
-    const item = queueItems[index];
-    let tempQueueItems = queueItems.filter((item, i) => i !== index);
-    tempQueueItems.unshift(item);
-    updateQueueItems(tempQueueItems);
+    socketRef.current.emit("placeItemFirst", {
+      itemIndex: index,
+      roomID: roomID,
+    });
   }
 
   function playVideo() {
-    console.log("playing vifdeo");
+    socketRef.current.emit("playVideo", {
+      roomID: roomID,
+    });
   }
 
   function pauseVideo() {
-    console.log("pause vifdeo");
+    socketRef.current.emit("pauseVideo", {
+      roomID: roomID,
+    });
   }
 
   return (
@@ -168,7 +215,11 @@ const SessionPage = () => {
       </div>
       <div className="youtube-page" id="desktop">
         {queueItems.length != 0 ? (
-          <YouTube videoId={queueItems[0].videoId} opts={opts} />
+          <YouTube
+            videoId={queueItems[0].videoId}
+            opts={opts}
+            onReady={handleReady}
+          />
         ) : (
           <div></div>
         )}
