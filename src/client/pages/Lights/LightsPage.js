@@ -3,6 +3,7 @@ import Navbar from "../../layout/Navbar.js";
 import "./css/lights.scss";
 import Applet from "./components/Applet.js";
 import AuthenticationError from "../../layout/AuthenticationError.js";
+import Lamp from './img/lamp.png';
 
 const LightControls = () => {
   return (
@@ -12,7 +13,7 @@ const LightControls = () => {
           <Navbar openMenu={false} />
           <div className="container">
             <Applet
-              appletImage={"http://placekitten.com/200/300"}
+              appletImage={Lamp}
               turnOnWebhook={
                 "https://maker.ifttt.com/trigger/switch1_on/with/key/cnpX5PYhtCEmEVq4_2WZz2"
               }
@@ -20,15 +21,7 @@ const LightControls = () => {
                 "https://maker.ifttt.com/trigger/switch1_off/with/key/cnpX5PYhtCEmEVq4_2WZz2"
               }
             />
-            <Applet
-              appletImage={"http://placekitten.com/200/300"}
-              turnOnWebhook={
-                "https://maker.ifttt.com/trigger/switch1_on/with/key/cnpX5PYhtCEmEVq4_2WZz2"
-              }
-              turnOffWebhook={
-                "https://maker.ifttt.com/trigger/switch1_off/with/key/cnpX5PYhtCEmEVq4_2WZz2"
-              }
-            />
+
           </div>
         </div>
       ) : (

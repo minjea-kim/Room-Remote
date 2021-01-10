@@ -1,0 +1,18 @@
+@import "../../../globalvariables.scss";
+
+.keyboard-mouse-page{
+    button{
+        width: 200px;
+        height: 75px;
+        touch-action: none;
+        // font-size: 2rem;
+    }
+    h1{
+        margin: 0;
+    }
+
+    .rc-slider{
+        width: 80%;
+        margin: 75px auto;
+    }
+}

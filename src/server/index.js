@@ -27,7 +27,6 @@ const io = require("socket.io")(http, {
   },
 });
 
-
 // Variables for app
 const username = "test";
 const password = "123";
@@ -70,6 +69,13 @@ http.listen(PORT, () => {
   console.log(`listening on *:${PORT}`);
 });
 
+// Keyboard, Mouse controller
+var robot = require("robotjs");
+robot.setMouseDelay(2); // Mouse Speed
+var mousePosition = robot.getMousePos();
+
+var mouseSpeed = 20;
+
 // SOCKET CONNECTION
 io.on("connection", (socket) => {
   const { roomID } = socket.handshake.query;
@@ -77,9 +83,77 @@ io.on("connection", (socket) => {
   socket.join(roomID);
   socket.emit("connection", null);
 
-  // Listen for new messages
+  socket.on("changeMouseSpeed", (speed) => {
+    mouseSpeed = speed;
+    console.log("Mouse speed changed to: ", speed)
+  });
+
+  socket.on("moveMouseUp", (data) => {
+    let pos = robot.getMousePos();
+    if (pos.x > mouseSpeed && pos.y > mouseSpeed) {
+      robot.moveMouseSmooth(pos.x, pos.y - mouseSpeed);
+    }
+  });
+
+  socket.on("moveMouseDown", (data) => {
+    let pos = robot.getMousePos();
+    if (pos.x > mouseSpeed && pos.y > mouseSpeed) {
+      robot.moveMouseSmooth(pos.x, pos.y + mouseSpeed);
+    }
+  });
+
+  socket.on("moveMouseLeft", (data) => {
+    let pos = robot.getMousePos();
+    if (pos.x > mouseSpeed && pos.y > mouseSpeed) {
+      robot.moveMouseSmooth(pos.x - mouseSpeed, pos.y);
+    }
+  });
+
+
+  socket.on("moveMouseLeftUp", (data) => {
+    let pos = robot.getMousePos();
+    if (pos.x > mouseSpeed && pos.y > mouseSpeed) {
+      robot.moveMouseSmooth(pos.x - mouseSpeed, pos.y - mouseSpeed);
+    }
+  });
+
+  socket.on("moveMouseLeftDown", (data) => {
+    let pos = robot.getMousePos();
+    if (pos.x > mouseSpeed && pos.y > mouseSpeed) {
+      robot.moveMouseSmooth(pos.x - mouseSpeed, pos.y + mouseSpeed);
+    }
+  });
+
+  socket.on("moveMouseRight", (data) => {
+    let pos = robot.getMousePos();
+    if (pos.x > mouseSpeed && pos.y > mouseSpeed) {
+      robot.moveMouseSmooth(pos.x + mouseSpeed, pos.y);
+    }
+  });
+
+  socket.on("moveMouseRightUp", (data) => {
+    let pos = robot.getMousePos();
+    if (pos.x > mouseSpeed && pos.y > mouseSpeed) {
+      robot.moveMouseSmooth(pos.x + mouseSpeed, pos.y - mouseSpeed);
+    }
+  });
+
+  socket.on("moveMouseRightDown", (data) => {
+    let pos = robot.getMousePos();
+    if (pos.x > mouseSpeed && pos.y > mouseSpeed) {
+
+      console.log(pos.x + mouseSpeed,", ", pos.y + mouseSpeed);
+      robot.moveMouseSmooth(pos.x + mouseSpeed, pos.y + mouseSpeed);
+    }
+  });
+
+  socket.on("woot", (data) => {
+    console.log("woot");
+    // robot.moveMouseSmooth()
+  });
+
+  // Actions for Queue
   socket.on("addNewItem", (data) => {
-    // console.log("NEW ITEM: ", data.body);
     queueItems.push(data.item);
     io.sockets.in(data.roomID).emit("addNewItem", data.item);
   });
