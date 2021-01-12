@@ -16,6 +16,7 @@ echo "Starting ngrok instances.."
 C:\\Users\\min_j\\OneDrive\\Desktop\\ngrok.exe http --host-header=rewrite 8080 &
 C:\\Users\\min_j\\OneDrive\\Desktop\\ngrok.exe http 3000 & 
 
+curl http://localhost:4040/api/tunnels -o client-webhook.json
 curl http://localhost:4041/api/tunnels -o server-webhook.json
 
 echo "Writing new webhook..."
