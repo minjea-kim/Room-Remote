@@ -5,14 +5,19 @@
   min-height: 100vh;
   min-width: 100vw;
 
-  button {
-    width: 200px;
-    height: 75px;
-    // touch-action: none;
-    // font-size: 2rem;
-  }
   h1 {
     margin: 0;
+    font-size: 1rem;
+  }
+
+  .screen{
+      background: gray;
+  }
+
+  .open-desktop-btn{
+      width: 60vw;
+      display: block;
+      margin: auto;
   }
 
   .horizontal-scroll {
