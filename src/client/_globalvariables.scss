@@ -1,0 +1,44 @@
+// Color Palette
+$font-color: #fefefe;
+$primary-color: #161616;
+
+// Global stylings
+html {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  height: -webkit-fill-available;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+*:focus {
+  outline: none;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  background-color: $primary-color;
+  color: $font-color;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  // overflow: hidden;
+  min-height: -webkit-fill-available;
+}
+
+.error-msg {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  margin: 0;
+  padding: 0.5rem;
+  background: #6a1a1a;
+  color: $font-color;
+  text-align: center;
+  animation: bounceInDown 1s;
+  z-index: 999;
+}

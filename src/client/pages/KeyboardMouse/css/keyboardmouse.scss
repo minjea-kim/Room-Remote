@@ -1,0 +1,123 @@
+@import "../../../globalvariables.scss";
+
+.keyboard-mouse-page {
+  background: #232323;
+  min-height: 100vh;
+  min-width: 100vw;
+
+  h1 {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .screen{
+      background: gray;
+  }
+
+  .open-desktop-btn{
+      width: 60vw;
+      display: block;
+      margin: auto;
+  }
+
+  .horizontal-scroll {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 5vw;
+
+    button {
+      height: 10vw;
+      width: 30vw;
+    }
+  }
+
+  .control-pad-container {
+    display: flex;
+    justify-content: space-evenly;
+    .rc-slider {
+      width: 10vw;
+      height: 200px;
+      margin: 0;
+    }
+
+    .control-pad {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0;
+      width: 60vw;
+      button {
+        width: 20vw;
+        height: 20vw;
+      }
+    }
+
+    .vertical-scroll {
+      button {
+        display: block;
+        width: 10vw;
+        height: 30vw;
+      }
+    }
+  }
+
+  .clickers {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    margin-top: 5vw;
+    width: 60vw;
+
+    button {
+      height: 10vw;
+      width: 28.5vw;
+    }
+  }
+
+  .divider {
+    margin: 20px auto;
+    background: black;
+    height: 2px;
+    width: 85%;
+  }
+
+  .misc-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: auto;
+    width: 60vw;
+
+    button {
+      height: 10vw;
+      width: 28.5vw;
+    }
+
+    .function {
+      width: 40vw;
+      margin-top: 10px;
+    }
+
+    .replay-function {
+      width: 15vw;
+      margin-top: 10px;
+    }
+  }
+
+  .text-control{
+      display: flex;
+      justify-content: space-between;
+      width: 60vw;
+      margin: auto;
+      margin-top: 50px;
+
+      input{
+          width: 80%;
+      }
+
+      button{
+          height: 40px;
+          width: 15%;
+      }
+  }
+}

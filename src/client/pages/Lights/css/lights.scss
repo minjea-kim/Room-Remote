@@ -1,0 +1,93 @@
+@import "../../../globalvariables.scss";
+
+.lights-page {
+  height: 100vh;
+  width: 100vw;
+  background-image: url("../img/wifi_signal.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  .container {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 5%;
+
+    h3 {
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    .applet {
+      display: flex;
+      flex-direction: column;
+      width: 40%;
+
+      $img-size: 150px;
+
+      img {
+        width: $img-size;
+        height: $img-size;
+        object-fit: cover;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+        border-radius: 5px;
+        margin: auto;
+      }
+      .controls {
+        display: flex;
+        background: none;
+        width: $img-size;
+        margin: auto;
+        margin-top: 10px;
+
+        button {
+          display: block;
+          font-size: 1rem;
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+          background: none;
+          margin: auto;
+          margin-top: 0.5rem;
+
+          svg {
+            height: 60%;
+            display: block;
+            margin: auto;
+          }
+        }
+
+        .turn-on-btn {
+          padding: 0;
+          background: linear-gradient(
+            136.18deg,
+            #1b1b1b -43.92%,
+            #161616 117.48%
+          );
+          border: 0.562848px solid #b6eeff;
+          box-sizing: border-box;
+          box-shadow: -1.43571px -1.43571px 7.17857px rgba(87, 87, 87, 0.5),
+            2.39286px 2.39286px 7.17857px #000000;
+          margin-right: 10px;
+        }
+
+        .turn-off-btn {
+          padding: 0;
+          background: linear-gradient(
+            136.18deg,
+            #1b1b1b -43.92%,
+            #161616 117.48%
+          );
+          border: 0.562848px solid #ff6666;
+          box-sizing: border-box;
+          box-shadow: -1.43571px -1.43571px 7.17857px rgba(87, 87, 87, 0.5),
+            2.39286px 2.39286px 7.17857px #000000;
+
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}

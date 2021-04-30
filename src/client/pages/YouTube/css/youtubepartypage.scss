@@ -1,0 +1,114 @@
+@import "../../../globalvariables.scss";
+
+.youtube-party-page {
+  position: relative;
+  background: linear-gradient(180deg, #003068 0.01%, #062447 100%);
+  width: 100vw;
+  height: 100vh;
+    min-height: 100vh;
+  min-height: -webkit-fill-available;
+  overflow: hidden;
+
+  img {
+    height: 50vh;
+    width: 100%;
+    object-fit: cover;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    animation: fadeIn 0.5s;
+  }
+
+  .decorator {
+    border-radius: 50%;
+  }
+
+  #one.decorator {
+    height: 50px;
+    width: 50px;
+    background: none;
+    border: 4px solid #fff;
+    position: absolute;
+    top: 2%;
+    left: 10%;
+    opacity: 0.8;
+  }
+
+  #two.decorator {
+    height: 80px;
+    width: 80px;
+    background: #c0ffff;
+    position: absolute;
+    top: -2%;
+    right: -2%;
+    opacity: 0.9;
+  }
+
+  #three.decorator {
+    height: 80px;
+    width: 80px;
+    background: #fefefe;
+    position: absolute;
+    top: 10%;
+    left: -35px;
+  }
+
+  #four.decorator {
+    height: 100px;
+    width: 100px;
+    background: #fff;
+    position: absolute;
+    top: 30%;
+    left: -60px;
+    opacity: 0.8;
+  }
+
+  form {
+    width: 65%;
+    margin: auto;
+
+    h1 {
+      margin: 0;
+      text-align: center;
+      font-weight: bold;
+      font-size: 2rem;
+      line-height: 2rem;
+      color: #e4f7ff;
+      margin-bottom: 1rem;
+    }
+
+    label,
+    input {
+      display: block;
+      width: 100%;
+    }
+
+    label {
+      padding-bottom: 0.5rem;
+    }
+    input {
+      border-radius: 5px;
+      background: none;
+      border: 1px solid $font-color;
+      height: 2rem;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: $font-color;
+      padding-left: 0.5rem;
+    }
+
+    button {
+      background: #1faeeb;
+      border: none;
+      font-size: 1.2rem;
+      padding: 0.8rem 1.4rem;
+      border-radius: 8px;
+      color: $font-color;
+      display: block;
+      margin: auto;
+      margin-top: 1.5rem;
+    }
+  }
+}
